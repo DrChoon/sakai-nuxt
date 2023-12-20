@@ -1,5 +1,6 @@
 <script setup>
 import { ProductService } from '@/service/ProductService';
+import { TransactionService } from '@/service/TransactionService';
 import { FilterMatchMode } from 'primevue/api';
 import { useToast } from 'primevue/usetoast';
 import { onMounted, ref } from 'vue';
@@ -23,8 +24,11 @@ const statuses = ref([
     { label: 'OUTOFSTOCK', value: 'outofstock' }
 ]);
 
+const transactions = ref(null);
+
 onMounted(() => {
-    ProductService.getProducts().then((data) => (products.value = data));
+    //ProductService.getProducts().then((data) => (products.value = data));
+    TransactionService.getTransactions().then((data) => (transactions.value = data));
 });
 
 const formatCurrency = (value) => {
